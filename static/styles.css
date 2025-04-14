@@ -1,0 +1,143 @@
+/* 🔹 Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* 🔹 Page Background */
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    color: #111;
+}
+
+/* 🔹 Left Panel */
+.left-panel {
+    width: 40%;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+/* 🔹 Clock */
+.clock-container {
+    text-align: left;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Headings */
+h1, .title {
+    color: #000;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 5px;
+    text-align: left;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f1f1f1;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 🔹 Button Row */
+.button-row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 16px;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/* 🔹 ETA Result */
+#eta_result {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: #111;
+    text-align: left;
+}
+
+/* 🔹 Surge Alert */
+.surge-alert {
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    margin-top: 10px;
+    text-align: left;
+    display: none;
+    color: white;
+}
+
+.surge-green {
+    background-color: #28a745;
+}
+
+.surge-yellow {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.surge-red {
+    background-color: #dc3545;
+}
+
+/* 🔹 Right Panel */
+.right-panel {
+    flex-grow: 1;
+    position: relative;
+}
+
+.right-panel iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+}
+
+
+
+
+

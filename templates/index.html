@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definitely Not Uber</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- 🔹 Left Side Form -->
+    <div class="left-panel">
+        <div class="clock-container" style="font-size: 28px; color: black; font-weight: 800;">
+            <div id="live-clock">--:--:--</div>
+        </div>
+
+        <h1 class="title">
+            <span style="color: black; font-weight: 600;">"Definitely Not"</span> <span style="background-color: black; color: white; padding: 6px 10px; border-radius: 6px;">Uber</span> 
+        </h1>
+
+        <label for="pickup_location">Pickup Location:</label>
+        <select id="pickup_location">
+            <option value="" selected disabled>Loading locations...</option>
+        </select>
+
+        <label for="drop_location">Drop Location:</label>
+        <select id="drop_location">
+            <option value="" selected disabled>Loading locations...</option>
+        </select>
+
+        <label for="weather_input">Weather:</label>
+        <select id="weather_input">
+            <option value="Sunny">Sunny</option>
+            <option value="Rainy">Rainy</option>
+            <option value="Foggy">Foggy</option>
+            <option value="Humid">Humid</option>
+        </select>
+
+        <label for="special_event">Special Event?</label>
+        <select id="special_event">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <div class="button-row">
+            <button onclick="getETA()">Get ETA</button>
+            <button onclick="checkSurge()"> Check Surge</button>
+        </div>
+
+        <div id="eta_result">ETA: -- minutes</div>
+        <div id="surge_alert" class="surge-alert">Confidence: --%</div>
+    </div>
+
+    <!-- 🔹 Right Side Heatmap -->
+    <div class="right-panel" style="padding: 20px;">
+        <iframe id="heatmapFrame" src="/heatmap" style="border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"></iframe>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
