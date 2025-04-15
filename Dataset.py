@@ -4,10 +4,10 @@ import random
 from datetime import datetime, timedelta
 from haversine import haversine
 
-# 🔹 Load Predefined Locations and Categories
+#  Load Predefined Locations and Categories
 location_data = pd.read_csv("location_data.csv")  # Contains 'location_name', 'latitude', 'longitude', 'category'
 
-# 🔹 Convert Locations to Dictionary
+#  Convert Locations to Dictionary
 location_coords = {
     row['location_name']: (row['latitude'], row['longitude']) 
     for _, row in location_data.iterrows()
@@ -80,13 +80,13 @@ for _ in range(num_rides):
         traffic_index, demand_index, weekend, special_events, hour, weather
     ])
 
-# 🔹 Convert Ride Data to DataFrame
+# Convert Ride Data to DataFrame
 columns = [
     "datetime", "pickup_location", "drop_location", "distance_km", "surge_multiplier",
     "traffic_index", "demand_index", "weekend", "special_events", "hour", "weather"
 ]
 df = pd.DataFrame(ride_data, columns=columns)
 
-# 🔹 Save Final Dataset
+#  Save Final Dataset
 df.to_csv("final_ride_dataset.csv", index=False)
 print("Dataset Created & Saved Successfully!")
