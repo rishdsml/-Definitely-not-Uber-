@@ -130,7 +130,7 @@ def predict_eta():
     # Apply Inverse Transform (Convert ETA Back to Minutes)
     if hasattr(pt_target_loaded, "lambdas_"):
         predicted_eta_original = pt_target_loaded.inverse_transform(predicted_eta.reshape(-1, 1))
-        corrected_eta = max(predicted_eta_original[0][0] - 5, 1)
+        corrected_eta = max(predicted_eta_original[0][0] - 15, 1)
     else:
         corrected_eta = float(predicted_eta[0])
 
