@@ -8,25 +8,27 @@ from datetime import datetime
 
 app = Flask(__name__,template_folder="templates", static_folder="static")
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 # Define base path
-base_path = r"C:\Users\p08pi\Desktop\Project\Packages"
-base_path2 = r"C:\Users\p08pi\Desktop\Project\Dictionary"
+#base_path = r"C:\Users\p08pi\Desktop\Project\Packages"
+#base_path2 = r"C:\Users\p08pi\Desktop\Project\Dictionary"
 
 #  **1. Load Locations from Excel File**
-location_file = os.path.join(base_path2, "final_categorized_locations.xlsx")
+location_file = os.path.join(PROJECT_ROOT, "Dictionary", "final_categorized_locations.xlsx")
 df_locations = pd.read_excel(location_file)  # Read the file
 locations_list = df_locations["Location"].tolist()  # Extract location names
 
 #Transformer Loading
-pt_input_loaded = joblib.load(os.path.join(base_path, "pt_inputf.pkl"))
-pt_target_loaded = joblib.load(os.path.join(base_path, "pt_targetf.pkl"))
-target_encf_loaded = joblib.load(os.path.join(base_path, "target_encf.pkl"))
-model_loaded = joblib.load(os.path.join(base_path, "modelf.pkl"))
+pt_input_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Packages", "pt_inputf.pkl"))
+pt_target_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Packages", "pt_targetf.pkl"))
+target_encf_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Packages", "target_encf.pkl"))
+model_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Packages", "modelf.pkl"))
 
 #Dictionary Loading
-location_dict_loaded = joblib.load(os.path.join(base_path2, "location_dict.pkl"))
-location_cat_dict_loaded = joblib.load(os.path.join(base_path2, "location_cat_dict.pkl"))
-distance_look_loaded = joblib.load(os.path.join(base_path2, "distance_look.pkl"))
+location_dict_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Dictionary", "location_dict.pkl"))
+location_cat_dict_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Dictionary", "location_cat_dict.pkl"))
+distance_look_loaded = joblib.load(os.path.join(PROJECT_ROOT, "Dictionary", "distance_look.pkl"))
 
 print("All things Loaded")
 
@@ -178,7 +180,8 @@ def predict_surge():
         # Load and apply PowerTransformer for surge inputs
         try:
             print("Step 1.5: demand_index =", demand_index, "| traffic_index =", traffic_index)
-            pt_surge = joblib.load(os.path.join(base_path, "pt_input_surge.pkl"))
+            pt_surge_path = os.path.join(PROJECT_ROOT, "Packages", "pt_input_surge.pkl")
+            pt_surge = joblib.load(pt_surge_path)
             scaled = pt_surge.transform(pd.DataFrame([[demand_index, traffic_index]], columns=["demand_index", "traffic_index"]))
             print("Step 1.6: Scaled values =", scaled)
             demand_index, traffic_index = scaled[0]
@@ -198,7 +201,8 @@ def predict_surge():
         print("Step 3: Loading model...")
 
         try:
-            surge_model = joblib.load(os.path.join(base_path, "modelc.pkl"))
+            surge_model_path = os.path.join(PROJECT_ROOT, "Packages", "modelc.pkl")
+            surge_model = joblib.load(surge_model_path)
             is_surge = int(surge_model.predict(surge_features)[0])
             proba = surge_model.predict_proba(surge_features)
             confidence = float(proba[0][1])
@@ -220,7 +224,7 @@ def predict_surge():
 # Route to serve the interactive demand heatmap
 @app.route('/heatmap')
 def heatmap():
-    absolute_path = r"C:\Users\p08pi\Desktop\Project\maps\button_heatmap_hiddenf.html"
+    absolute_path = os.path.join(PROJECT_ROOT, "maps", "button_heatmap_hiddenf.html")
     return send_file(absolute_path)
 
 if __name__ == '__main__':
